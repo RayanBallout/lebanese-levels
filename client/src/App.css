@@ -1,0 +1,14 @@
+.navigation {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+button.tab-activation {
+	background: none;
+	border: 1px solid blue;
+	color: blue;
+	border-radius: 5px;
+	padding: 5px 10px;
+}
