@@ -1,5 +1,5 @@
 const router = require("express").Router()
-let Town = require("../../models/town.schema")
+let Town = require("../models/town.schema")
 
 router.route("/").get((req, res) => {
 	Town.find()
