@@ -9,26 +9,28 @@ const ViewTowns = () => {
 	const [searchTerm, setSearchTerm] = useState("")
 
 	useEffect(() => {
-		axios.get("http://localhost:5000/town").then((res) => {
+		axios.get("https://lebanese-levels.herokuapp.com/town").then((res) => {
 			if (res.data.length > 0) {
 				setTowns(res.data)
 			}
 		})
 
-		axios.get("http://localhost:5000/governorate").then((res) => {
-			if (res.data.length > 0) {
-				var assoscNames = []
-				const mapping = res.data.map((governorate) => {
-					return (assoscNames[governorate._id] = governorate.name)
-				})
+		axios
+			.get("https://lebanese-levels.herokuapp.com/governorate")
+			.then((res) => {
+				if (res.data.length > 0) {
+					var assoscNames = []
+					const mapping = res.data.map((governorate) => {
+						return (assoscNames[governorate._id] = governorate.name)
+					})
 
-				return Promise.all(mapping).then(() => {
-					setGovernorateNames(assoscNames)
-				})
-			}
-		})
+					return Promise.all(mapping).then(() => {
+						setGovernorateNames(assoscNames)
+					})
+				}
+			})
 
-		axios.get("http://localhost:5000/caza").then((res) => {
+		axios.get("https://lebanese-levels.herokuapp.com/caza").then((res) => {
 			if (res.data.length > 0) {
 				var assoscNames = []
 				const mapping = res.data.map((caza) => {
@@ -53,18 +55,22 @@ const ViewTowns = () => {
 		const timer = setTimeout(() => {
 			if (searchTerm) {
 				axios
-					.get(`http://localhost:5000/town/nameLike/${searchTerm}`)
+					.get(
+						`https://lebanese-levels.herokuapp.com/town/nameLike/${searchTerm}`
+					)
 					.then((res) => {
 						if (res.data.length > 0) {
 							setTowns(res.data)
 						}
 					})
 			} else {
-				axios.get("http://localhost:5000/town").then((res) => {
-					if (res.data.length > 0) {
-						setTowns(res.data)
-					}
-				})
+				axios
+					.get("https://lebanese-levels.herokuapp.com/town")
+					.then((res) => {
+						if (res.data.length > 0) {
+							setTowns(res.data)
+						}
+					})
 			}
 		})
 	}, [searchTerm])
@@ -105,7 +111,7 @@ const ViewTowns = () => {
 					{towns &&
 						towns.map((town) => {
 							return (
-								<tr>
+								<tr key={town._id}>
 									<th scope="row">{town._id}</th>
 									<td>{town.name}</td>
 									<td>{town.arabic_name}</td>

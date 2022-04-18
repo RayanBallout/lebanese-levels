@@ -20,7 +20,10 @@ const AddGovernorate = () => {
 		}
 
 		axios
-			.post("http://localhost:5000/governorate/add", governateObject)
+			.post(
+				"https://lebanese-levels.herokuapp.com/governorate/add",
+				governateObject
+			)
 			.then((res) => {
 				setMessage(res.data)
 				setName("")

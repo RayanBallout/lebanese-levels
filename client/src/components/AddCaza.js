@@ -113,7 +113,10 @@ const AddCaza = () => {
 					>
 						{governorates.map((governorate) => {
 							return (
-								<option value={governorate._id}>
+								<option
+									value={governorate._id}
+									key={governorate._id}
+								>
 									{governorate.name}
 								</option>
 							)

@@ -18,7 +18,7 @@ const ViewGovernorates = () => {
 			if (searchTerm) {
 				axios
 					.get(
-						`http://localhost:5000/governorate/nameLike/${searchTerm}`
+						`https://lebanese-levels.herokuapp.com/governorate/nameLike/${searchTerm}`
 					)
 					.then((res) => {
 						if (res.data.length > 0) {
@@ -26,11 +26,13 @@ const ViewGovernorates = () => {
 						}
 					})
 			} else {
-				axios.get("http://localhost:5000/governorate").then((res) => {
-					if (res.data.length > 0) {
-						setGovernorates(res.data)
-					}
-				})
+				axios
+					.get("https://lebanese-levels.herokuapp.com/governorate")
+					.then((res) => {
+						if (res.data.length > 0) {
+							setGovernorates(res.data)
+						}
+					})
 			}
 		}, 500)
 
@@ -38,11 +40,13 @@ const ViewGovernorates = () => {
 	}, [searchTerm])
 
 	useEffect(() => {
-		axios.get("http://localhost:5000/governorate").then((res) => {
-			if (res.data.length > 0) {
-				setGovernorates(res.data)
-			}
-		})
+		axios
+			.get("https://lebanese-levels.herokuapp.com/governorate")
+			.then((res) => {
+				if (res.data.length > 0) {
+					setGovernorates(res.data)
+				}
+			})
 	}, [])
 
 	return (

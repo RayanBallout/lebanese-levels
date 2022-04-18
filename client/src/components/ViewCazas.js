@@ -17,41 +17,47 @@ const ViewCazas = () => {
 		const timer = setTimeout(() => {
 			if (searchTerm) {
 				axios
-					.get(`http://localhost:5000/caza/nameLike/${searchTerm}`)
+					.get(
+						`https://lebanese-levels.herokuapp.com/caza/nameLike/${searchTerm}`
+					)
 					.then((res) => {
 						if (res.data.length > 0) {
 							setCazas(res.data)
 						}
 					})
 			} else {
-				axios.get("http://localhost:5000/caza").then((res) => {
-					if (res.data.length > 0) {
-						setCazas(res.data)
-					}
-				})
+				axios
+					.get("https://lebanese-levels.herokuapp.com/caza")
+					.then((res) => {
+						if (res.data.length > 0) {
+							setCazas(res.data)
+						}
+					})
 			}
 		})
 	}, [searchTerm])
 
 	useEffect(() => {
-		axios.get("http://localhost:5000/caza").then((res) => {
+		axios.get("https://lebanese-levels.herokuapp.com/caza").then((res) => {
 			if (res.data.length > 0) {
 				setCazas(res.data)
 			}
 		})
 
-		axios.get("http://localhost:5000/governorate").then((res) => {
-			if (res.data.length > 0) {
-				var assoscNames = []
-				const mapping = res.data.map((governorate) => {
-					return (assoscNames[governorate._id] = governorate.name)
-				})
+		axios
+			.get("https://lebanese-levels.herokuapp.com/governorate")
+			.then((res) => {
+				if (res.data.length > 0) {
+					var assoscNames = []
+					const mapping = res.data.map((governorate) => {
+						return (assoscNames[governorate._id] = governorate.name)
+					})
 
-				return Promise.all(mapping).then(() => {
-					setGovernorateNames(assoscNames)
-				})
-			}
-		})
+					return Promise.all(mapping).then(() => {
+						setGovernorateNames(assoscNames)
+					})
+				}
+			})
 	}, [])
 
 	return (

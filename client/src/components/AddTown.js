@@ -26,22 +26,26 @@ const AddTown = () => {
 			governorate_id: governateId,
 		}
 
-		axios.post("http://localhost:5000/town/add", townObject).then((res) => {
-			setMessage(res.data)
-			setName("")
-			setArabicName("")
-			setArea("")
-			setAltitude("")
-		})
+		axios
+			.post("https://lebanese-levels.herokuapp.com/town/add", townObject)
+			.then((res) => {
+				setMessage(res.data)
+				setName("")
+				setArabicName("")
+				setArea("")
+				setAltitude("")
+			})
 	}
 
 	useEffect(() => {
-		axios.get("http://localhost:5000/governorate").then((res) => {
-			if (res.data.length > 0) {
-				setGovernorates(res.data)
-				setGovernateId(res.data[0]._id)
-			}
-		})
+		axios
+			.get("https://lebanese-levels.herokuapp.com/governorate")
+			.then((res) => {
+				if (res.data.length > 0) {
+					setGovernorates(res.data)
+					setGovernateId(res.data[0]._id)
+				}
+			})
 	}, [])
 
 	useEffect(() => {
@@ -49,7 +53,9 @@ const AddTown = () => {
 			setCazas([])
 			setCazaId("")
 			axios
-				.get(`http://localhost:5000/caza/inGovernate/${governateId}`)
+				.get(
+					`https://lebanese-levels.herokuapp.com/caza/inGovernate/${governateId}`
+				)
 				.then((res) => {
 					if (res.data.length > 0) {
 						setCazas(res.data)
