@@ -73,6 +73,8 @@ const ViewTowns = () => {
 					})
 			}
 		})
+
+		return () => clearTimeout(timer)
 	}, [searchTerm])
 
 	return (

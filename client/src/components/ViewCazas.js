@@ -35,6 +35,8 @@ const ViewCazas = () => {
 					})
 			}
 		})
+
+		return () => clearTimeout(timer)
 	}, [searchTerm])
 
 	useEffect(() => {
